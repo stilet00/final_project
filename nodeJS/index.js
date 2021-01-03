@@ -18,10 +18,8 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();
 })
-app.get(url1 + 'translators', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    db.collection('translators').find().toArray((err, docs) => {
+app.get(url1 + 'cities', (req, res) => {
+    db.collection('cities').find().toArray((err, docs) => {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -29,61 +27,57 @@ app.get(url1 + 'translators', (req, res) => {
         res.send(docs);
     })
 })
-app.put(url1 + 'translators/' + ':id', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    db.collection('translators').updateOne({_id: ObjectId(req.params.id)}, {$set: {name: req.body.name,
-            clients: req.body.clients,
-            cardNumber: req.body.cardNumber
-        }}, (err) => {
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
-        }
-        res.sendStatus(200);
-
-    })
-})
+// app.put(url1 + 'addcity', (req, res) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//     db.collection('translators').updateOne({_id: ObjectId(req.params.id)}, {$set: {name: req.body.name,
+//             clients: req.body.clients,
+//             cardNumber: req.body.cardNumber
+//         }}, (err) => {
+//         if (err) {
+//             console.log(err);
+//             return res.sendStatus(500);
+//         }
+//         res.sendStatus(200);
+//
+//     })
+// })
 
 //получаем итем
-app.get(url1 + ':id', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    db.collection('translators').findOne({_id: ObjectId(req.params.id)}, (err, docs) => {
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
-        }
-        res.send(docs);
-    })
-})
+// app.get(url1 + ':id', (req, res) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//     db.collection('translators').findOne({_id: ObjectId(req.params.id)}, (err, docs) => {
+//         if (err) {
+//             console.log(err);
+//             return res.sendStatus(500);
+//         }
+//         res.send(docs);
+//     })
+// })
 //получаем итем
-app.delete(url1 + 'delete/' + ':id', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    db.collection('translators').deleteOne({_id: ObjectId(req.params.id)}, (err, docs) => {
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
-        }
-        res.sendStatus(200);
-    })
-})
+// app.delete(url1 + 'delete/' + ':id', (req, res) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//     db.collection('translators').deleteOne({_id: ObjectId(req.params.id)}, (err, docs) => {
+//         if (err) {
+//             console.log(err);
+//             return res.sendStatus(500);
+//         }
+//         res.sendStatus(200);
+//     })
+// })
 
 
 app.post(url1 + 'add', (req, res) => {
-    let translator = {
-        name: req.body.name,
-        clients: [],
-        cardNumber: ''
+    let city = {
+        name: req.body.name
     }
-    db.collection('translators').insertOne(translator, (err, result) => {
+    db.collection('cities').insertOne(city, (err, result) => {
         if (err) {
-            console.log(err);
             return res.sendStatus(500);
         } else {
-            console.log('added translator to database');
-            res.send(translator);
+            res.send('city is added database');
         }
     })
 
