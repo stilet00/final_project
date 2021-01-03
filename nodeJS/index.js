@@ -2,6 +2,7 @@ let express = require('express');
 let MongoClient = require('mongodb').MongoClient;
 let ObjectId = require('mongodb').ObjectID;
 let bodyParser = require('body-parser');
+let os = require('os');
 let db;
 
 
@@ -14,8 +15,12 @@ let client = new MongoClient(url2);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extented: true}));
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    // req.header("Access-Control-Allow-Origin", "*");
+    // res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    //Работает только так:
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     next();
 })
 app.get(url1 + 'cities', (req, res) => {
@@ -24,24 +29,46 @@ app.get(url1 + 'cities', (req, res) => {
             console.log(err);
             return res.sendStatus(500);
         }
-        res.send(docs);
+        res.send(docs)
     })
 })
-// app.put(url1 + 'addcity', (req, res) => {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//     db.collection('translators').updateOne({_id: ObjectId(req.params.id)}, {$set: {name: req.body.name,
-//             clients: req.body.clients,
-//             cardNumber: req.body.cardNumber
-//         }}, (err) => {
-//         if (err) {
-//             console.log(err);
-//             return res.sendStatus(500);
-//         }
-//         res.sendStatus(200);
-//
-//     })
-// })
+app.delete(url1 + ':id', (req, res) => {
+    db.collection('cities').deleteOne({_id: ObjectId(req.params.id)}, (err, docs) => {
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.sendStatus(200);
+    })
+})
+app.post(url1 + 'add', (req, res) => {
+    if (req.body.name) {
+        let city = {
+            name: req.body.name
+        }
+        db.collection('cities').insertOne(city, (err, result) => {
+            if (err) {
+                return res.sendStatus(500);
+            } else {
+                res.send(result);
+            }
+        })
+    }
+
+})
+app.put(url1 + 'change', (req, res) => {
+    db.collection('cities').updateOne({_id: ObjectId(req.params.id)}, {$set: {name: req.body.name,
+            clients: req.body.clients,
+            cardNumber: req.body.cardNumber
+        }}, (err) => {
+        if (err) {
+            console.log(err);
+            return res.sendStatus(500);
+        }
+        res.sendStatus(200);
+
+    })
+})
 
 //получаем итем
 // app.get(url1 + ':id', (req, res) => {
@@ -56,32 +83,10 @@ app.get(url1 + 'cities', (req, res) => {
 //     })
 // })
 //получаем итем
-// app.delete(url1 + 'delete/' + ':id', (req, res) => {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//     db.collection('translators').deleteOne({_id: ObjectId(req.params.id)}, (err, docs) => {
-//         if (err) {
-//             console.log(err);
-//             return res.sendStatus(500);
-//         }
-//         res.sendStatus(200);
-//     })
-// })
 
 
-app.post(url1 + 'add', (req, res) => {
-    let city = {
-        name: req.body.name
-    }
-    db.collection('cities').insertOne(city, (err, result) => {
-        if (err) {
-            return res.sendStatus(500);
-        } else {
-            res.send('city is added database');
-        }
-    })
 
-})
+
 
 
 

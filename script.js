@@ -3,9 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
 class View {
     constructor () {
         this.container = document.querySelector('.container');
+        this.input = document.querySelector('input');
     }
-    buildCityBlock(res, imagesrc, temp) {
+    buildCityBlock(res, imagesrc, temp, id) {
         let cityBlock = document.createElement('div');
+        cityBlock.id = id;
         cityBlock.classList.add('city');
         this.container.append(cityBlock);
         this.content2CityBlock(cityBlock, res, imagesrc, temp);
@@ -20,6 +22,7 @@ class View {
         let windSpeed = document.createElement('h3');
         let humidity = document.createElement('h3');
         button.innerHTML = 'DELETE';
+        button.setAttribute('data-id', "delete");
         image.setAttribute('src', imagesrc);
         tempreture.innerHTML = `${temp} &deg C`;
         maxInfo.classList.add('maxInfo');
@@ -31,28 +34,38 @@ class View {
         maxInfo.append(skyState, windSpeed, humidity);
 
     }
+    // clearCityList() {
+    //     this.cityBlock.innerHTML = '';
+    // }
+    clearInput() {
+        this.input.innerHTML = '';
+    }
+    removeCity(target) {
+        target.parentNode.remove();
+    }
 }
 class Model {
     constructor (view) {
-        this.view = view
+        this.view = view,
+        this.cityNumber = 0;
     }
-    // initCityList() {
-    //     let promise = fetch('https://localhost:3333/cities');
-    //     promise
-    //         .then(res => res.json())
-    //         .then(res => res.forEach(item => {
-    //           this.view.buildCityBlock(item)
-    //         }))
-    //         .catch(err => console.log(err))
-    // }
-    getData(cityName) {
-        // this.saveToServer(cityName);
+    initCityList() {
+        let promise = fetch('http://localhost:3333/cities');
+        promise
+            .then(res => res.json())
+            .then(res => res.forEach(item => {
+              this.getData(item.name, item._id);
+            }))
+            .catch(err => console.log(err))
+        // this.cityNumber = document.querySelectorAll('.city').length;
+        console.log(document.querySelectorAll('.city'));
+    }
+    getData(cityName, id) {
         let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
         promise
             .then(res => res.json())
             .then(res => {
-                // console.log(res);
-                this.view.buildCityBlock(res, this.getWeatherImage(res['weather'][0].icon), this.calculateTempreture(res.main.temp));
+                this.view.buildCityBlock(res, this.getWeatherImage(res['weather'][0].icon), this.calculateTempreture(res.main.temp), id);
 
             })
             .catch(err => console.log(err))
@@ -64,19 +77,28 @@ class Model {
         return Math.ceil(Number(kelvin) - 273.15);
     }
     saveToServer(cityName) {
-        let promise = fetch('https://localhost:3333/add', {
+        let city = {
+            name: cityName
+        }
+        let promise = fetch('http://localhost:3333/add', {
             method: "POST",
-            body: `name : ${cityName}`
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(city)
         });
         promise
-            .then(res => alert(res))
-            .catch(err => alert(err))
+            .then(res => res.text())
+            .then(res => console.log('done'))
+            .catch(err => console.log('not done'))
     }
-    getCitiList() {
-        let promise = fetch('http://localhost:3333/cities');
+    deleteFromServer (id) {
+        let promise = fetch('http://localhost:3333/' + id, {
+            method: "DELETE"
+        });
         promise
-            .then(res => res.json())
             .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
 
 }
@@ -85,12 +107,17 @@ class Controller {
         this.model = model
     }
     listen() {
-        // this.model.initCityList();
+        this.model.initCityList();
         this.model.view.container.addEventListener('click', (e) => {
             if (e.target.id === "add") {
-                this.model.getData(e.target.previousElementSibling.value);
+                this.model.getData(this.model.view.input.value);
+                this.model.saveToServer(this.model.view.input.value);
+                this.model.view.clearInput();
+            } else if (e.target.dataset.id === "delete") {
+                this.model.deleteFromServer(e.target.parentNode.id);
+                this.model.view.removeCity(e.target);
             }
-            // this.model.saveToServer(e.target.previousElementSibling.value);
+
         })
         }
     }
