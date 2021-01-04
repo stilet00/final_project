@@ -100,7 +100,10 @@ class Model {
                 this.view.buildCityBlock(res, this.getWeatherImage(res['weather'][0].icon), this.calculateTempreture(res.main.temp), id, currentBlock);
 
             })
-            .catch(err => this.view.alertMessage('No such city!'))
+            .catch(err => {
+                this.view.alertMessage('No such city!');
+                this.deleteFromServer(id);
+            })
 
     }
     getWeatherImage(code) {
