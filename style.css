@@ -96,9 +96,15 @@ input {
     border-radius: 10px;
     border: 1px solid aliceblue;
 }
+.smallWidget:first-child {
+    display: flex;
+    align-items: center;
+}
 #locationAllow {
     width: 100%;
     border-radius: 10px;
+    height: 100px;
+    margin-top: 25px;
 }
 .alert {
     color: #9F6000;
@@ -133,6 +139,14 @@ input {
     input {
         font-size: 75px;
     }
+    .widgets {
+        padding: 0;
+        flex-direction: column;
+    }
+    .smallWidget {
+        width: 100%;
+    }
+
 
 
 }

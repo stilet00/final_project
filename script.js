@@ -6,7 +6,7 @@ class View {
         this.input = document.querySelector('input');
         this.widgets = document.createElement('div');
         this.currencyWidget = document.createElement('div');
-        this.locationWidget = document.createElement('div');
+        this.geoWidget = document.createElement('div');
     }
     buildCityBlock(res, imagesrc, temp, id, currentBlock) {
         if (!currentBlock) {
@@ -68,12 +68,12 @@ class View {
     pictureWidgetsBlock() {
         this.widgets.classList.add('widgets');
         this.currencyWidget.classList.add('smallWidget');
-        this.locationWidget.classList.add('smallWidget');
+        this.geoWidget.classList.add('smallWidget');
         let button = document.createElement('button');
         button.id = 'locationAllow';
-        button.innerHTML = "click here";
-        this.locationWidget.append(button);
-        this.widgets.append(this.locationWidget, this.currencyWidget);
+        button.innerHTML = "Receive your weather";
+        this.geoWidget.append(button);
+        this.widgets.append(this.geoWidget, this.currencyWidget);
         document.body.append(this.widgets);
     }
     pictureCurrencyWidget(curr) {
@@ -81,7 +81,21 @@ class View {
         currency.innerHTML = curr;
         this.currencyWidget.append(currency)
     }
+    pictureGeoWidget(cityName, temp, imgSrc) {
+        this.geoWidget.innerHTML = '';
+        let city = document.createElement('h2');
+        let tempreture = document.createElement('h2');
+        let img = document.createElement('img');
+        city.innerHTML = cityName;
+        tempreture.innerHTML = `${temp} &deg C`;
+        img.setAttribute('src', imgSrc);
+        this.geoWidget.append(city,tempreture,img);
 
+    }
+    geoWidgetWait(text) {
+        this.geoWidget.innerHTML = '';
+        this.geoWidget.innerHTML = text;
+    }
     clearCurrencyWidget() {
         this.currencyWidget.innerHTML = '';
     }
@@ -128,6 +142,28 @@ class Model {
                 this.view.pictureCurrencyWidget(`${item.ccy}/${item.base_ccy} : ${item.buy}/${item.sale}`)
             }))
         setTimeout(this.initCurrencyWidget, 3600000)
+    }
+    initGeoWidget = () => {
+        let success = (position) => {
+            const lat  = position.coords.latitude;
+            const lon = position.coords.longitude;
+            let promise = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=e50ec27dac6fac01c3d6889743f8b9d5`);
+            promise
+                .then(res => res.json())
+                .then(res => this.view.pictureGeoWidget(res.name, this.calculateTempreture(res.main.temp), this.getWeatherImage(res['weather'][0].icon)))
+        }
+
+        let error = () => {
+            this.view.geoWidgetWait('Unable to retrieve your location');
+        }
+
+        if(!navigator.geolocation) {
+            this.view.geoWidgetWait('Geolocation is not supported by your browser');
+        } else {
+            this.view.geoWidgetWait('Locating…');
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+
     }
     getData(cityName, id, currentBlock) {
         this.cityList++;
@@ -219,6 +255,11 @@ class Controller {
             }
 
         })
+        this.model.view.widgets.addEventListener('click', (e) => {
+            if (e.target.id === "locationAllow") {
+                this.model.initGeoWidget();
+            }
+        })
         }
     }
 
@@ -227,10 +268,4 @@ let view = new View();
 let model = new Model(view);
 let controller = new Controller(model);
 controller.listen();
-// function getBase() {
-//     let promise = fetch('https://localhost:3333/cities');
-//     promise.then(res => console.log(res))
-//         .catch(err => console.log(err))
-// }
-// getBase()
 })
