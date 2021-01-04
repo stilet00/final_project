@@ -7,12 +7,15 @@
     flex-direction: column;
     height: 100vh;
 }
-.container button {
-    background: dodgerblue;
+button {
     width: 10%;
     height: 40px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+.add-button {
+    background: dodgerblue;
+
 }
 .container div {
     width: 70%;
@@ -48,7 +51,7 @@ input {
     align-items: center;
     justify-content: space-evenly;
 }
-.city button {
+.delete-button {
     background: indianred;
 }
 .city h2 {
@@ -63,6 +66,32 @@ input {
     padding: 20px;
     display: flex;
     border-radius: 10px;
+}
+.change-city-input {
+    width: 150px;
+    border-radius: 0;
+}
+.change-city-button {
+    background: dodgerblue;
+    position: absolute;
+    left: 200px;
+    top: 180px;
+    width: 175px;
+    height: 20px;
+    border-radius: 0;
+}
+
+.alert {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    position: absolute;
+    top: 200px;
+    width: 100%;
+    z-index: 600;
+    transition: 2s;
+    border: 2px solid #9F6000;
+    border-radius: 20px;
+    text-align: center;
 }
 @media (max-width: 1024px) {
     .container {

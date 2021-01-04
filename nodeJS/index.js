@@ -50,7 +50,7 @@ app.post(url1 + 'add', (req, res) => {
             if (err) {
                 return res.sendStatus(500);
             } else {
-                res.send(result);
+                res.send(result.ops[0]._id);
             }
         })
     }

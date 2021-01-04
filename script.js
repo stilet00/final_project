@@ -21,6 +21,8 @@ class View {
         let skyState = document.createElement('h3');
         let windSpeed = document.createElement('h3');
         let humidity = document.createElement('h3');
+        cityCountry.setAttribute('data-type', 'location')
+        button.classList.add('delete-button')
         button.innerHTML = 'DELETE';
         button.setAttribute('data-id', "delete");
         image.setAttribute('src', imagesrc);
@@ -34,14 +36,37 @@ class View {
         maxInfo.append(skyState, windSpeed, humidity);
 
     }
-    // clearCityList() {
-    //     this.cityBlock.innerHTML = '';
-    // }
     clearInput() {
-        this.input.innerHTML = '';
+        this.input.value = '';
     }
     removeCity(target) {
         target.parentNode.remove();
+    }
+    reNameCity(target) {
+        let div = target.parentNode;
+        let input = document.createElement('input');
+        let button = document.createElement('button');
+        input.classList.add('change-city-input');
+        button.classList.add('change-city-button')
+        input.setAttribute('placeholder', 'Enter new city...')
+        button.innerHTML = "save";
+        div.replaceChild(input, target);
+        div.append(button);
+
+    }
+    alertMessage(text) {
+        let div = document.createElement('div');
+        div.classList.add('alert');
+        let h1 = document.createElement('h1');
+        h1.innerHTML = text;
+        div.append(h1);
+        this.container.append(div);
+        setTimeout(this.removeAlertMessage, 2000);
+
+    }
+    removeAlertMessage() {
+        let div = document.querySelector('.alert');
+        div.remove();
     }
 }
 class Model {
@@ -76,7 +101,7 @@ class Model {
     calculateTempreture(kelvin) {
         return Math.ceil(Number(kelvin) - 273.15);
     }
-    saveToServer(cityName) {
+    saveToServer = (cityName) => {
         let city = {
             name: cityName
         }
@@ -88,11 +113,12 @@ class Model {
             body: JSON.stringify(city)
         });
         promise
-            .then(res => res.text())
-            .then(res => console.log('done'))
-            .catch(err => console.log('not done'))
+            .then(res => res.json())
+            .then(res => this.getData(cityName, res))
+            .catch(err => console.log(err))
     }
     deleteFromServer (id) {
+        this.cityList--;
         let promise = fetch('http://localhost:3333/' + id, {
             method: "DELETE"
         });
@@ -110,15 +136,16 @@ class Controller {
         this.model.initCityList();
         this.model.view.container.addEventListener('click', (e) => {
             if (e.target.id === "add" && this.model.cityList !== 5) {
-                this.model.getData(this.model.view.input.value);
                 this.model.saveToServer(this.model.view.input.value);
                 this.model.view.clearInput();
-                console.log(this.model.cityList)
             } else if (e.target.id === "add" && this.model.cityList === 5) {
-                alert('Maximum 5 cities!');
+                this.model.view.alertMessage('Maximum 5 cities!');
             } else if (e.target.dataset.id === "delete") {
                 this.model.deleteFromServer(e.target.parentNode.id);
                 this.model.view.removeCity(e.target);
+            } else if (e.target.dataset.type === "location") {
+                this.model.view.reNameCity(e.target);
+
             }
 
         })
