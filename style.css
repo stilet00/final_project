@@ -39,6 +39,7 @@ input {
     letter-spacing: 2px;
 }
 .city {
+    position: relative;
     transition: .5s;
     box-sizing: border-box;
     padding: 10px;
@@ -74,8 +75,8 @@ input {
 .change-city-button {
     background: dodgerblue;
     position: absolute;
-    left: 200px;
-    top: 180px;
+    left: 30px;
+    bottom: 0px;
     width: 175px;
     height: 20px;
     border-radius: 0;

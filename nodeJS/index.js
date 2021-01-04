@@ -56,13 +56,11 @@ app.post(url1 + 'add', (req, res) => {
     }
 
 })
-app.put(url1 + 'change', (req, res) => {
-    db.collection('cities').updateOne({_id: ObjectId(req.params.id)}, {$set: {name: req.body.name,
-            clients: req.body.clients,
-            cardNumber: req.body.cardNumber
+app.put(url1 + ':id', (req, res) => {
+    db.collection('cities').updateOne({_id: ObjectId(req.params.id)}, {$set: {
+        name: req.body.name
         }}, (err) => {
         if (err) {
-            console.log(err);
             return res.sendStatus(500);
         }
         res.sendStatus(200);

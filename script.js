@@ -5,12 +5,19 @@ class View {
         this.container = document.querySelector('.container');
         this.input = document.querySelector('input');
     }
-    buildCityBlock(res, imagesrc, temp, id) {
-        let cityBlock = document.createElement('div');
-        cityBlock.id = id;
-        cityBlock.classList.add('city');
-        this.container.append(cityBlock);
-        this.content2CityBlock(cityBlock, res, imagesrc, temp);
+    buildCityBlock(res, imagesrc, temp, id, currentBlock) {
+        if (!currentBlock) {
+            let cityBlock = document.createElement('div');
+            cityBlock.id = id;
+            cityBlock.classList.add('city');
+            this.container.append(cityBlock);
+            this.content2CityBlock(cityBlock, res, imagesrc, temp);
+        } else {
+            currentBlock.innerHTML = '';
+            this.content2CityBlock(currentBlock, res, imagesrc, temp);
+        }
+
+
     }
     content2CityBlock(cityBlock, res, imagesrc, temp) {
         let cityCountry = document.createElement('h2');
@@ -46,6 +53,7 @@ class View {
         let div = target.parentNode;
         let input = document.createElement('input');
         let button = document.createElement('button');
+        button.setAttribute('data-type', 'save')
         input.classList.add('change-city-input');
         button.classList.add('change-city-button')
         input.setAttribute('placeholder', 'Enter new city...')
@@ -83,16 +91,16 @@ class Model {
             }))
             .catch(err => console.log(err))
     }
-    getData(cityName, id) {
+    getData(cityName, id, currentBlock) {
         this.cityList++;
         let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
         promise
             .then(res => res.json())
             .then(res => {
-                this.view.buildCityBlock(res, this.getWeatherImage(res['weather'][0].icon), this.calculateTempreture(res.main.temp), id);
+                this.view.buildCityBlock(res, this.getWeatherImage(res['weather'][0].icon), this.calculateTempreture(res.main.temp), id, currentBlock);
 
             })
-            .catch(err => console.log(err))
+            .catch(err => this.view.alertMessage('No such city!'))
 
     }
     getWeatherImage(code) {
@@ -126,6 +134,23 @@ class Model {
             .then(res => console.log(res))
             .catch(err => console.log(err))
     }
+    changeAtServer(cityName, id) {
+        let city = {
+            name: cityName
+        }
+        let promise = fetch('http://localhost:3333/' + id, {
+            method: "PUT",
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(city)
+        });
+        promise
+            .then(res => res.text())
+            .then(res => this.view.alertMessage('City has been changed!'))
+            .catch(err => console.log(err))
+    }
+
 
 }
 class Controller {
@@ -146,6 +171,9 @@ class Controller {
             } else if (e.target.dataset.type === "location") {
                 this.model.view.reNameCity(e.target);
 
+            } else if (e.target.dataset.type === "save") {
+                this.model.changeAtServer(e.target.parentNode.firstChild.value, e.target.parentNode.id)
+                this.model.getData(e.target.parentNode.firstChild.value, e.target.parentNode.id, e.target.parentNode)
             }
 
         })
