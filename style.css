@@ -1,11 +1,12 @@
-.container {
+body {
     background: url("https://images.alphacoders.com/218/thumb-1920-218193.jpg");
+}
+.container {
     background-size: cover;
     display: flex;
     align-items: center;
     padding: 20px;
     flex-direction: column;
-    height: 100vh;
 }
 button {
     width: 10%;
@@ -46,7 +47,7 @@ input {
     border-radius: 5px;
     margin-top: 10px;
     width: 70%;
-    height: 80px;
+    height: 90px;
     background: orange;
     display: flex;
     align-items: center;
@@ -81,7 +82,24 @@ input {
     height: 20px;
     border-radius: 0;
 }
-
+.widgets {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.smallWidget {
+    width: 250px;
+    transition: .5s;
+    background: lightblue;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid aliceblue;
+}
+#locationAllow {
+    width: 100%;
+    border-radius: 10px;
+}
 .alert {
     color: #9F6000;
     background-color: #FEEFB3;

@@ -4,6 +4,9 @@ class View {
     constructor () {
         this.container = document.querySelector('.container');
         this.input = document.querySelector('input');
+        this.widgets = document.createElement('div');
+        this.currencyWidget = document.createElement('div');
+        this.locationWidget = document.createElement('div');
     }
     buildCityBlock(res, imagesrc, temp, id, currentBlock) {
         if (!currentBlock) {
@@ -62,6 +65,27 @@ class View {
         div.append(button);
 
     }
+    pictureWidgetsBlock() {
+        this.widgets.classList.add('widgets');
+        this.currencyWidget.classList.add('smallWidget');
+        this.locationWidget.classList.add('smallWidget');
+        let button = document.createElement('button');
+        button.id = 'locationAllow';
+        button.innerHTML = "click here";
+        this.locationWidget.append(button);
+        this.widgets.append(this.locationWidget, this.currencyWidget);
+        document.body.append(this.widgets);
+    }
+    pictureCurrencyWidget(curr) {
+        let currency = document.createElement('p');
+        currency.innerHTML = curr;
+        this.currencyWidget.append(currency)
+    }
+
+    clearCurrencyWidget() {
+        this.currencyWidget.innerHTML = '';
+    }
+
     alertMessage(text) {
         let div = document.createElement('div');
         div.classList.add('alert');
@@ -90,6 +114,20 @@ class Model {
               this.getData(item.name, item._id);
             }))
             .catch(err => console.log(err))
+    }
+    initWidgets() {
+        this.view.pictureWidgetsBlock();
+        this.initCurrencyWidget();
+    }
+    initCurrencyWidget = () => {
+        this.view.clearCurrencyWidget()
+        let promise = fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5');
+        promise
+            .then(res => res.json())
+            .then(res => res.forEach(item => {
+                this.view.pictureCurrencyWidget(`${item.ccy}/${item.base_ccy} : ${item.buy}/${item.sale}`)
+            }))
+        setTimeout(this.initCurrencyWidget, 3600000)
     }
     getData(cityName, id, currentBlock) {
         this.cityList++;
@@ -162,6 +200,7 @@ class Controller {
     }
     listen() {
         this.model.initCityList();
+        this.model.initWidgets();
         this.model.view.container.addEventListener('click', (e) => {
             if (e.target.id === "add" && this.model.cityList !== 5) {
                 this.model.saveToServer(this.model.view.input.value);
