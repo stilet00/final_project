@@ -46,8 +46,8 @@ class View {
 }
 class Model {
     constructor (view) {
-        this.view = view,
-        this.cityNumber = 0;
+            this.view = view,
+            this.cityList = 0
     }
     initCityList() {
         let promise = fetch('http://localhost:3333/cities');
@@ -57,10 +57,9 @@ class Model {
               this.getData(item.name, item._id);
             }))
             .catch(err => console.log(err))
-        // this.cityNumber = document.querySelectorAll('.city').length;
-        console.log(document.querySelectorAll('.city'));
     }
     getData(cityName, id) {
+        this.cityList++;
         let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
         promise
             .then(res => res.json())
@@ -69,6 +68,7 @@ class Model {
 
             })
             .catch(err => console.log(err))
+
     }
     getWeatherImage(code) {
         return `http://openweathermap.org/img/wn/${code}@2x.png`
@@ -109,10 +109,13 @@ class Controller {
     listen() {
         this.model.initCityList();
         this.model.view.container.addEventListener('click', (e) => {
-            if (e.target.id === "add") {
+            if (e.target.id === "add" && this.model.cityList !== 5) {
                 this.model.getData(this.model.view.input.value);
                 this.model.saveToServer(this.model.view.input.value);
                 this.model.view.clearInput();
+                console.log(this.model.cityList)
+            } else if (e.target.id === "add" && this.model.cityList === 5) {
+                alert('Maximum 5 cities!');
             } else if (e.target.dataset.id === "delete") {
                 this.model.deleteFromServer(e.target.parentNode.id);
                 this.model.view.removeCity(e.target);

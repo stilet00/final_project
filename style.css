@@ -36,6 +36,7 @@ input {
     letter-spacing: 2px;
 }
 .city {
+    transition: .5s;
     box-sizing: border-box;
     padding: 10px;
     border-radius: 5px;
@@ -63,3 +64,28 @@ input {
     display: flex;
     border-radius: 10px;
 }
+@media (max-width: 1024px) {
+    .container {
+        font-size: 27px;
+    }
+    .container div {
+        width: 100%;
+    }
+    .container button {
+        font-size: 17px;
+        border-radius: 50%;
+        height: 100px;
+    }
+    .city {
+        height: 200px;
+    }
+    .search-field {
+        height: 200px;
+    }
+    input {
+        font-size: 75px;
+    }
+
+
+}
+
