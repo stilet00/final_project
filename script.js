@@ -32,7 +32,8 @@ class View {
         let windSpeed = document.createElement('h3');
         let humidity = document.createElement('h3');
         cityCountry.setAttribute('data-type', 'location')
-        button.classList.add('delete-button')
+        button.classList.add('delete-button');
+        button.classList.add('floating-button')
         button.innerHTML = 'DELETE';
         button.setAttribute('data-id', "delete");
         image.setAttribute('src', imagesrc);
@@ -55,13 +56,25 @@ class View {
     reNameCity(target) {
         let div = target.parentNode;
         let input = document.createElement('input');
-        let button = document.createElement('button');
-        button.setAttribute('data-type', 'save')
+        let buttonSave = document.createElement('button');
+        let buttonClose = document.createElement('button');
+        buttonClose.setAttribute('data-type', 'close');
+        buttonSave.setAttribute('data-type', 'save');
         input.classList.add('change-city-input');
-        button.classList.add('change-city-button')
+        buttonClose.classList.add('close-change-button');
+        buttonClose.classList.add('floating-button');
+        buttonSave.classList.add('change-city-button');
+        buttonSave.classList.add('floating-button');
         input.setAttribute('placeholder', 'Enter new city...')
-        button.innerHTML = "save";
-        div.append(input, button);
+        buttonSave.innerHTML = "save";
+        buttonClose.innerHTML = "close";
+        div.append(input, buttonSave, buttonClose);
+
+    }
+    cancelChange(buttonClose) {
+        buttonClose.previousSibling.remove();
+        buttonClose.previousSibling.remove();
+        buttonClose.remove();
 
     }
     pictureWidgetsBlock() {
@@ -70,6 +83,7 @@ class View {
         this.geoWidget.classList.add('smallWidget');
         let button = document.createElement('button');
         button.id = 'locationAllow';
+        button.classList.add('floating-button')
         button.innerHTML = "Receive your weather";
         this.geoWidget.append(button);
         this.widgets.append(this.geoWidget, this.currencyWidget);
@@ -93,7 +107,9 @@ class View {
     }
     geoWidgetWait(text) {
         this.geoWidget.innerHTML = '';
-        this.geoWidget.innerHTML = text;
+        let h4 = document.createElement('h4')
+        h4.innerText = text;
+        this.geoWidget.append(h4);
     }
     clearCurrencyWidget() {
         this.currencyWidget.innerHTML = '';
@@ -292,19 +308,19 @@ class Controller {
         this.model.initCityList();
         this.model.initWidgets();
         this.model.view.container.addEventListener('click', (e) => {
-            if (e.target.id === "add" && this.model.cityList !== 5) {
+            if (e.target.id === "add") {
                 this.model.getNewCity(this.model.view.input.value);
                 this.model.view.clearInput();
-            } else if (e.target.id === "add" && this.model.cityList === 5) {
-                this.model.view.alertMessage('Maximum 5 cities!');
             } else if (e.target.dataset.id === "delete") {
                 this.model.deleteFromServer(e.target.parentNode.id);
                 this.model.view.removeCity(e.target);
             } else if (e.target.dataset.type === "location") {
                 this.model.view.reNameCity(e.target);
-
             } else if (e.target.dataset.type === "save") {
                    this.model.renameCity(e.target.previousSibling.value, e.target.parentNode)
+            } else if (e.target.dataset.type === "close") {
+                this.model.view.cancelChange(e.target)
+
             }
 
         })
