@@ -61,8 +61,7 @@ class View {
         button.classList.add('change-city-button')
         input.setAttribute('placeholder', 'Enter new city...')
         button.innerHTML = "save";
-        div.replaceChild(input, target);
-        div.append(button);
+        div.append(input, button);
 
     }
     pictureWidgetsBlock() {
@@ -182,10 +181,17 @@ class Model {
         let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
         promise
             .then(res => res.json())
-            .then(res => this.saveToServer(res))
-            .then(res => this.cityList++)
-            .catch(err => this.view.alertMessage('No such city!'))
+            .then(res => {if (res.readyState === 4 && res.status === 200) {this.saveToServer(res)}})
+            .catch(err => { if (err) {this.view.alertMessage('No such city!')}})
 
+    }
+    renameCity(cityName, parentNode) {
+        let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
+        promise
+            .then(res => res.json())
+            .then(res => this.changeAtServer(cityName, parentNode.id, res, parentNode))
+            .then(res => console.log(res))
+            .catch(err => this.view.alertMessage('No such city!'))
     }
     getWeatherImage(code) {
         return `http://openweathermap.org/img/wn/${code}@2x.png`
@@ -218,7 +224,7 @@ class Model {
             .then(res => console.log(res))
             .catch(err => console.log(err))
     }
-    changeAtServer(cityName, id) {
+    changeAtServer(cityName, id, freshData, parentNode) {
         let city = {
             name: cityName
         }
@@ -231,6 +237,7 @@ class Model {
         });
         promise
             .then(res => res.text())
+            .then(res => this.view.buildCityBlock(freshData, this.getWeatherImage(freshData['weather'][0].icon), this.calculateTempreture(freshData.main.temp), id, parentNode))
             .then(res => this.view.alertMessage('City has been changed!'))
             .catch(err => console.log(err))
     }
@@ -257,8 +264,7 @@ class Controller {
                 this.model.view.reNameCity(e.target);
 
             } else if (e.target.dataset.type === "save") {
-                this.model.changeAtServer(e.target.parentNode.firstChild.value, e.target.parentNode.id)
-                this.model.getData(e.target.parentNode.firstChild.value, e.target.parentNode.id, e.target.parentNode)
+                   this.model.renameCity(e.target.previousSibling.value, e.target.parentNode)
             }
 
         })
