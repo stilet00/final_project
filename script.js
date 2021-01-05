@@ -125,7 +125,7 @@ class Model {
         promise
             .then(res => res.json())
             .then(res => res.forEach(item => {
-              this.getData(item.name, item._id);
+              this.refreshData(item.name, item._id);
             }))
             .catch(err => console.log(err))
     }
@@ -165,7 +165,7 @@ class Model {
         }
 
     }
-    getData(cityName, id, currentBlock) {
+    refreshData(cityName, id, currentBlock) {
         this.cityList++;
         let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
         promise
@@ -174,10 +174,17 @@ class Model {
                 this.view.buildCityBlock(res, this.getWeatherImage(res['weather'][0].icon), this.calculateTempreture(res.main.temp), id, currentBlock);
 
             })
-            .catch(err => {
-                this.view.alertMessage('No such city!');
-                this.deleteFromServer(id);
-            })
+            .catch(err => this.view.alert(err)
+            )
+
+    }
+    getNewCity = (cityName) => {
+        let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
+        promise
+            .then(res => res.json())
+            .then(res => this.saveToServer(res))
+            .then(res => this.cityList++)
+            .catch(err => this.view.alertMessage('No such city!'))
 
     }
     getWeatherImage(code) {
@@ -186,9 +193,9 @@ class Model {
     calculateTempreture(kelvin) {
         return Math.ceil(Number(kelvin) - 273.15);
     }
-    saveToServer = (cityName) => {
+    saveToServer = (responseFromWeather) => {
         let city = {
-            name: cityName
+            name: responseFromWeather['name'],
         }
         let promise = fetch('http://localhost:3333/add', {
             method: "POST",
@@ -199,7 +206,7 @@ class Model {
         });
         promise
             .then(res => res.json())
-            .then(res => this.getData(cityName, res))
+            .then(res => this.view.buildCityBlock(responseFromWeather, this.getWeatherImage(responseFromWeather['weather'][0].icon), this.calculateTempreture(responseFromWeather.main.temp), res))
             .catch(err => console.log(err))
     }
     deleteFromServer (id) {
@@ -239,7 +246,7 @@ class Controller {
         this.model.initWidgets();
         this.model.view.container.addEventListener('click', (e) => {
             if (e.target.id === "add" && this.model.cityList !== 5) {
-                this.model.saveToServer(this.model.view.input.value);
+                this.model.getNewCity(this.model.view.input.value);
                 this.model.view.clearInput();
             } else if (e.target.id === "add" && this.model.cityList === 5) {
                 this.model.view.alertMessage('Maximum 5 cities!');
