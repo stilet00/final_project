@@ -173,7 +173,7 @@ class Model {
         }
 
     }
-    refreshData(cityName, id, currentBlock) {
+    refreshData(cityName, id) {
         let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
         promise
             .then(res => {
@@ -183,7 +183,7 @@ class Model {
                     return Promise.reject(res.status);
                 }})
             .then(res => {
-                this.view.buildCityBlock(res, this.getWeatherImage(res['weather'][0].icon), this.calculateTempreture(res.main.temp), id, currentBlock);
+                this.view.buildCityBlock(res, this.getWeatherImage(res['weather'][0].icon), this.calculateTempreture(res.main.temp), id);
 
             })
             .catch(err => this.view.alert(err)
@@ -288,7 +288,7 @@ class Controller {
     constructor (model) {
         this.model = model
     }
-    listen() {
+    _initApp() {
         this.model.initCityList();
         this.model.initWidgets();
         this.model.view.container.addEventListener('click', (e) => {
@@ -320,5 +320,5 @@ class Controller {
 let view = new View();
 let model = new Model(view);
 let controller = new Controller(model);
-controller.listen();
+controller._initApp();
 })

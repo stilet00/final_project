@@ -70,7 +70,7 @@ input {
     border-radius: 10px;
 }
 .change-city-input {
-    width: 150px;
+    width: 20%;
     border-radius: 0;
     position: absolute;
     bottom: -10px;
@@ -79,9 +79,9 @@ input {
 .change-city-button {
     background: dodgerblue;
     position: absolute;
-    left: 174px;
+    left: 20%;
     bottom: -10px;
-    width: 175px;
+    width: 20%;
     height: 40px;
     border-radius: 0;
 }
@@ -128,7 +128,7 @@ input {
     .container div {
         width: 100%;
     }
-    .container button {
+    button {
         font-size: 17px;
         border-radius: 50%;
         height: 100px;
@@ -147,9 +147,25 @@ input {
         flex-direction: column;
     }
     .smallWidget {
-        width: 100%;
-    }
 
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .smallWidget:first-child {
+        display: flex;
+        justify-content: space-evenly;
+
+    }
+    .change-city-button {
+        left: 23%;
+        border-radius: 10px;
+        height: 40%;
+    }
+    .add-button {
+        border-radius: 0px;
+        height: 100%;
+    }
 
 
 }
