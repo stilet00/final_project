@@ -116,8 +116,7 @@ class View {
 }
 class Model {
     constructor (view) {
-            this.view = view,
-            this.cityList = 0
+            this.view = view
     }
     initCityList() {
         let promise = fetch('http://localhost:3333/cities');
@@ -136,7 +135,12 @@ class Model {
         this.view.clearCurrencyWidget()
         let promise = fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5');
         promise
-            .then(res => res.json())
+            .then((res => {
+                if (res.ok && res.status === 200) {
+                    return res.json();
+                } else {
+                    return Promise.reject(res.status);
+                }}))
             .then(res => res.forEach(item => {
                 this.view.pictureCurrencyWidget(`${item.ccy}/${item.base_ccy} : ${item.buy}/${item.sale}`)
             }))
@@ -148,7 +152,12 @@ class Model {
             const lon = position.coords.longitude;
             let promise = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=e50ec27dac6fac01c3d6889743f8b9d5`);
             promise
-                .then(res => res.json())
+                .then((res => {
+                    if (res.ok && res.status === 200) {
+                        return res.json();
+                    } else {
+                        return Promise.reject(res.status);
+                    }}))
                 .then(res => this.view.pictureGeoWidget(res.name, this.calculateTempreture(res.main.temp), this.getWeatherImage(res['weather'][0].icon)))
         }
 
@@ -165,10 +174,14 @@ class Model {
 
     }
     refreshData(cityName, id, currentBlock) {
-        this.cityList++;
         let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
         promise
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok && res.status === 200) {
+                    return res.json();
+                } else {
+                    return Promise.reject(res.status);
+                }})
             .then(res => {
                 this.view.buildCityBlock(res, this.getWeatherImage(res['weather'][0].icon), this.calculateTempreture(res.main.temp), id, currentBlock);
 
@@ -180,18 +193,30 @@ class Model {
     getNewCity = (cityName) => {
         let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
         promise
-            .then(res => res.json())
-            .then(res => {if (res.readyState === 4 && res.status === 200) {this.saveToServer(res)}})
-            .catch(err => { if (err) {this.view.alertMessage('No such city!')}})
+            .then(res => {
+                if (res.ok && res.status === 200) {
+                    return res.json();
+                } else {
+                    return Promise.reject(res.status);
+                }})
+            .then(res => this.saveToServer(res))
+            .catch(err => this.view.alertMessage('No such city!'))
 
     }
+
+
+
     renameCity(cityName, parentNode) {
         let promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
         promise
-            .then(res => res.json())
+            .then((res => {
+                if (res.ok && res.status === 200) {
+                    return res.json();
+                } else {
+                    return Promise.reject(res.status);
+                }}))
             .then(res => this.changeAtServer(cityName, parentNode.id, res, parentNode))
-            .then(res => console.log(res))
-            .catch(err => this.view.alertMessage('No such city!'))
+            .catch(err => err?this.view.alertMessage('No such city!'):console.log('no error'))
     }
     getWeatherImage(code) {
         return `http://openweathermap.org/img/wn/${code}@2x.png`
@@ -211,7 +236,12 @@ class Model {
             body: JSON.stringify(city)
         });
         promise
-            .then(res => res.json())
+            .then((res => {
+                if (res.ok && res.status === 200) {
+                    return res.json();
+                } else {
+                    return Promise.reject(res.status);
+                }}))
             .then(res => this.view.buildCityBlock(responseFromWeather, this.getWeatherImage(responseFromWeather['weather'][0].icon), this.calculateTempreture(responseFromWeather.main.temp), res))
             .catch(err => console.log(err))
     }
@@ -221,7 +251,12 @@ class Model {
             method: "DELETE"
         });
         promise
-            .then(res => console.log(res))
+            .then((res => {
+                if (res.ok && res.status === 200) {
+                    return res.json();
+                } else {
+                    return Promise.reject(res.status);
+                }}))
             .catch(err => console.log(err))
     }
     changeAtServer(cityName, id, freshData, parentNode) {
@@ -236,7 +271,12 @@ class Model {
             body: JSON.stringify(city)
         });
         promise
-            .then(res => res.text())
+            .then((res => {
+                if (res.ok && res.status === 200) {
+                    return res.text();
+                } else {
+                    return Promise.reject(res.status);
+                }}))
             .then(res => this.view.buildCityBlock(freshData, this.getWeatherImage(freshData['weather'][0].icon), this.calculateTempreture(freshData.main.temp), id, parentNode))
             .then(res => this.view.alertMessage('City has been changed!'))
             .catch(err => console.log(err))
