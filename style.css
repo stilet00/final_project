@@ -1,6 +1,7 @@
 body {
     font-family: Comic Sans MS, Comic Sans, cursive;
     background: url("https://images.alphacoders.com/218/thumb-1920-218193.jpg");
+    color: #6f6e6e;
 }
 
 .container {
@@ -16,6 +17,7 @@ div h2:active {
     transition: 1s;
 }
 button {
+    outline: none;
     width: 10%;
     height: 40px;
     border: none;
@@ -63,6 +65,7 @@ button:focus {
     margin: 0;
 }
 input {
+    outline: none;
     transition: 1s;
     font-family: Comic Sans MS, Comic Sans, cursive;
     width: 90%;
@@ -171,7 +174,7 @@ input:active {
     color: #d6eaf8;
     background-color: #2EE59D;
     position: absolute;
-    top: 200px;
+    /*top: 200px;*/
     z-index: 600;
     transition: 2s;
     border: 2px solid #d6eaf8;
@@ -202,6 +205,7 @@ input:active {
     .widgets {
         padding: 0;
         flex-direction: column;
+        align-items: center;
     }
     .smallWidget {
 
@@ -216,13 +220,51 @@ input:active {
     }
     .change-city-button {
         left: 23%;
-        border-radius: 10px;
         height: 40%;
     }
     .add-button {
         height: 100%;
     }
 
+
+}
+@media (max-width: 375px) {
+    .search-field {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .city-search {
+        height: 40%;
+        font-size: 60%;
+    }
+    .add-button {
+        height: 40%;
+    }
+    .city {
+        flex-wrap: wrap;
+        display: flex;
+        font-size: 20px;
+        height: 10%;
+    }
+    .widgets {
+        align-items: center;
+    }
+    .change-city-input {
+        width: 80%;
+        bottom: 40%;
+        font-size: 20px;
+    }
+    .change-city-button {
+        left: 90%;
+        bottom: 150px;
+        height: 50px;
+    }
+    .close-change-button {
+        bottom: 100px;
+        left: 90%;
+        height: 50px;
+    }
 
 }
 

@@ -120,6 +120,7 @@ class View {
         div.classList.add('alert');
         let h1 = document.createElement('h1');
         h1.innerHTML = text;
+        div.style.top = window.pageYOffset + document.documentElement.clientHeight / 3 + 'px';
         div.append(h1);
         this.container.append(div);
         setTimeout(this.removeAlertMessage, 2000);
