@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var windSpeed = document.createElement('h3');
         var humidity = document.createElement('h3');
         cityCountry.setAttribute('data-type', 'location');
+        cityCountry.classList.add('city-country');
         button.classList.add('delete-button');
         button.classList.add('floating-button');
         button.innerHTML = 'DELETE';

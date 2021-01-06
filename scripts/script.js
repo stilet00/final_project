@@ -31,7 +31,8 @@ class View {
         let skyState = document.createElement('h3');
         let windSpeed = document.createElement('h3');
         let humidity = document.createElement('h3');
-        cityCountry.setAttribute('data-type', 'location')
+        cityCountry.setAttribute('data-type', 'location');
+        cityCountry.classList.add('city-country')
         button.classList.add('delete-button');
         button.classList.add('floating-button')
         button.innerHTML = 'DELETE';

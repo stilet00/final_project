@@ -88,12 +88,28 @@ input:active {
     border-radius: 5px;
     margin-top: 10px;
     width: 70%;
-    height: 90px;
+    height: 30%;
     background: #d6eaf8;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
+
+.city-country::after {
+    content: "click to edit";
+    position: absolute;
+    background: #2EE59D;
+    color: white;
+    width: 100px;
+    height: 15px;
+    font-size: 10px;
+    text-align: center;
+    border-radius: 5px;
+    bottom: 10px;
+    left: 20px;
+
+}
+
 .delete-button {
     background: #ff3000;
 }
@@ -199,8 +215,8 @@ input:active {
     .search-field {
         height: 200px;
     }
-    input {
-        font-size: 75px;
+    .city-search {
+        font-size: 30px;
     }
     .widgets {
         padding: 0;
@@ -220,7 +236,7 @@ input:active {
     }
     .change-city-button {
         left: 23%;
-        height: 40%;
+        height: 20%;
     }
     .add-button {
         height: 100%;
@@ -234,9 +250,10 @@ input:active {
         flex-wrap: wrap;
         justify-content: center;
     }
+
     .city-search {
         height: 40%;
-        font-size: 60%;
+        font-size: 30px;
     }
     .add-button {
         height: 40%;
@@ -265,6 +282,10 @@ input:active {
         left: 90%;
         height: 50px;
     }
-
+    .city-country::after {
+        transition: 1s;
+        bottom: 59%;
+        /*transform: rotate(90deg);*/
+    }
 }
 
