@@ -9,21 +9,23 @@
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1"
   },
   "name": "weather-app",
   "description": "one-page application",
   "version": "1.0.0",
-  "main": "scripts/script.js",
+  "main": "src/scripts/script.js",
   "scripts": {
-    "start": "node back_end/index.js",
-    "dev": "nodemon back_end/index.js"
+    "start": "node src/back_end/index.js",
+    "dev": "nodemon src/back_end/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stilet00/final_project.git"
   },
-  "author": "antonstilet",
+  "author": "antonstilet <safroninanton@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/stilet00/final_project/issues"
