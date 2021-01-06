@@ -53,7 +53,7 @@ class View {
     removeCity(target) {
         target.parentNode.remove();
     }
-    reNameCity(target) {
+    pictureRename(target) {
         let div = target.parentNode;
         let input = document.createElement('input');
         let buttonSave = document.createElement('button');
@@ -263,14 +263,13 @@ class Model {
             .catch(err => console.log(err))
     }
     deleteFromServer (id) {
-        this.cityList--;
         let promise = fetch('http://localhost:3333/' + id, {
             method: "DELETE"
         });
         promise
             .then((res => {
                 if (res.ok && res.status === 200) {
-                    return res.json();
+                    this.view.alertMessage('City has been deleted!');
                 } else {
                     return Promise.reject(res.status);
                 }}))
@@ -290,12 +289,11 @@ class Model {
         promise
             .then((res => {
                 if (res.ok && res.status === 200) {
-                    return res.text();
+                    this.view.alertMessage('City has been changed!')
                 } else {
                     return Promise.reject(res.status);
                 }}))
             .then(res => this.view.buildCityBlock(freshData, this.getWeatherImage(freshData['weather'][0].icon), this.calculateTempreture(freshData.main.temp), id, parentNode))
-            .then(res => this.view.alertMessage('City has been changed!'))
             .catch(err => console.log(err))
     }
 
@@ -316,7 +314,7 @@ class Controller {
                 this.model.deleteFromServer(e.target.parentNode.id);
                 this.model.view.removeCity(e.target);
             } else if (e.target.dataset.type === "location") {
-                this.model.view.reNameCity(e.target);
+                this.model.view.pictureRename(e.target);
             } else if (e.target.dataset.type === "save") {
                    this.model.renameCity(e.target.previousSibling.value, e.target.parentNode)
             } else if (e.target.dataset.type === "close") {

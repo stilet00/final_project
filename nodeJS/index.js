@@ -2,7 +2,6 @@ let express = require('express');
 let MongoClient = require('mongodb').MongoClient;
 let ObjectId = require('mongodb').ObjectID;
 let bodyParser = require('body-parser');
-let os = require('os');
 let db;
 
 
@@ -23,6 +22,7 @@ app.use(function(req, res, next) {
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     next();
 })
+
 app.get(url1 + 'cities', (req, res) => {
     db.collection('cities').find().toArray((err, docs) => {
         if (err) {
@@ -67,25 +67,6 @@ app.put(url1 + ':id', (req, res) => {
 
     })
 })
-
-//получаем итем
-// app.get(url1 + ':id', (req, res) => {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//     db.collection('translators').findOne({_id: ObjectId(req.params.id)}, (err, docs) => {
-//         if (err) {
-//             console.log(err);
-//             return res.sendStatus(500);
-//         }
-//         res.send(docs);
-//     })
-// })
-//получаем итем
-
-
-
-
-
 
 
 client.connect(function (err) {
