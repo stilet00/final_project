@@ -1,0 +1,291 @@
+body {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    background: url("https://images.alphacoders.com/218/thumb-1920-218193.jpg");
+    color: #6f6e6e;
+}
+
+.container {
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    flex-direction: column;
+}
+
+div h2:active {
+    color: red;
+    transition: 1s;
+}
+button {
+    outline: none;
+    width: 10%;
+    height: 40px;
+    border: none;
+}
+button:focus {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.floating-button {
+    text-decoration: none;
+    display: inline-block;
+    width: 140px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 45px;
+    margin: 10px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #524f4e;
+    background: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+}
+.floating-button:hover {
+    background: #2EE59D;
+    box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
+    color: white;
+    transform: translateY(-7px);
+}
+.container div {
+    width: 70%;
+}
+.container .maxInfo {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+.maxInfo h3 {
+    margin: 0;
+}
+input {
+    outline: none;
+    transition: 1s;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    width: 90%;
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: transparent;
+    letter-spacing: 2px;
+}
+input:active {
+    transform: scaleX(2);
+
+}
+.city {
+    position: relative;
+    transition: .5s;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 70%;
+    height: 30%;
+    background: #d6eaf8;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.city-country::after {
+    content: "click to edit";
+    position: absolute;
+    background: #2EE59D;
+    color: white;
+    width: 100px;
+    height: 15px;
+    font-size: 10px;
+    text-align: center;
+    border-radius: 5px;
+    bottom: 10px;
+    left: 20px;
+
+}
+
+.delete-button {
+    background: #ff3000;
+}
+.delete-button:hover {
+    background: #ff3000;
+    box-shadow: 0 15px 20px rgba(229, 46, 83, 0.4);
+}
+.city h2 {
+    width: 150px;
+}
+.search-field {
+    box-sizing: border-box;
+    background: #d6eaf8;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+    transition: .5s;
+    padding: 20px;
+    display: flex;
+    border-radius: 10px;
+}
+.change-city-input {
+    width: 20%;
+    border-radius: 0;
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+}
+.change-city-button {
+    margin: 0;
+    position: absolute;
+    left: 24%;
+    bottom: -10px;
+    width: 20%;
+    height: 40px;
+}
+.close-change-button {
+    margin: 0;
+    position: absolute;
+    left: 44%;
+    bottom: -10px;
+    width: 20%;
+    height: 40px;
+
+}
+.close-change-button:hover {
+    background: #ff3000;
+    box-shadow: 0 15px 20px rgba(229, 46, 83, 0.4);
+}
+.widgets {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.smallWidget {
+    width: 250px;
+    transition: .5s;
+    background: #d6eaf8;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid aliceblue;
+}
+.smallWidget:hover {
+    transform: translateY(-7px);
+}
+
+.smallWidget:first-child {
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+#locationAllow {
+    width: 100%;
+    border-radius: 10px;
+    height: 100px;
+    margin-top: 25px;
+}
+.alert {
+    color: #d6eaf8;
+    background-color: #2EE59D;
+    position: absolute;
+    /*top: 200px;*/
+    z-index: 600;
+    transition: 2s;
+    border: 2px solid #d6eaf8;
+    border-radius: 20px;
+    text-align: center;
+}
+@media (max-width: 1024px) {
+    .container {
+        font-size: 27px;
+    }
+    .container div {
+        width: 100%;
+    }
+    button {
+        font-size: 17px;
+        height: 100px;
+    }
+    .city {
+        height: 200px;
+        font-size: 20px;
+    }
+    .search-field {
+        height: 200px;
+    }
+    .city-search {
+        font-size: 30px;
+    }
+    .widgets {
+        padding: 0;
+        flex-direction: column;
+        align-items: center;
+    }
+    .smallWidget {
+
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .smallWidget:first-child {
+        display: flex;
+        justify-content: space-evenly;
+
+    }
+    .change-city-button {
+        left: 23%;
+        height: 20%;
+    }
+    .add-button {
+        height: 100%;
+    }
+
+
+}
+@media (max-width: 375px) {
+    .search-field {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .city-search {
+        height: 40%;
+        font-size: 30px;
+    }
+    .add-button {
+        height: 40%;
+    }
+    .city {
+        flex-wrap: wrap;
+        display: flex;
+        font-size: 20px;
+        height: 10%;
+    }
+    .widgets {
+        align-items: center;
+    }
+    .change-city-input {
+        width: 80%;
+        bottom: 40%;
+        font-size: 20px;
+    }
+    .change-city-button {
+        left: 90%;
+        bottom: 150px;
+        height: 50px;
+    }
+    .close-change-button {
+        bottom: 100px;
+        left: 90%;
+        height: 50px;
+    }
+    .city-country::after {
+        transition: 1s;
+        bottom: 59%;
+        /*transform: rotate(90deg);*/
+    }
+}
+
