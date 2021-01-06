@@ -5,12 +5,16 @@
     "node": "^15.4.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
     "nodemon": "^2.0.6"
   },
   "name": "weather-app",
   "description": "one-page application",
   "version": "1.0.0",
-  "main": "script.js",
+  "main": "scripts/script.js",
   "scripts": {
     "start": "node nodeJS/index.js",
     "dev": "nodemon nodeJS/index.js"
