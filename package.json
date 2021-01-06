@@ -16,8 +16,8 @@
   "version": "1.0.0",
   "main": "scripts/script.js",
   "scripts": {
-    "start": "node nodeJS/index.js",
-    "dev": "nodemon nodeJS/index.js"
+    "start": "node back_end/index.js",
+    "dev": "nodemon back_end/index.js"
   },
   "repository": {
     "type": "git",
