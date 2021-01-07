@@ -1,1 +1,456 @@
-(()=>{"use strict";var e={588:(e,t,n)=>{n.d(t,{Z:()=>a});var i=n(476),o=n.n(i)()((function(e){return e[1]}));o.push([e.id,'body {\n    font-family: Comic Sans MS, Comic Sans, cursive;\n    background: url("https://images.alphacoders.com/218/thumb-1920-218193.jpg");\n    color: #6f6e6e;\n}\n\n.container {\n    background-size: cover;\n    display: flex;\n    align-items: center;\n    padding: 20px;\n    flex-direction: column;\n}\n\ndiv h2:active {\n    color: red;\n    transition: 1s;\n}\nbutton {\n    outline: none;\n    width: 10%;\n    height: 40px;\n    border: none;\n}\nbutton:focus {\n    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);\n    -webkit-tap-highlight-color: transparent;\n}\n\n\n.floating-button {\n    text-decoration: none;\n    display: inline-block;\n    width: 140px;\n    height: 45px;\n    line-height: 45px;\n    border-radius: 45px;\n    margin: 10px 20px;\n    font-family: \'Montserrat\', sans-serif;\n    font-size: 11px;\n    text-transform: uppercase;\n    text-align: center;\n    letter-spacing: 3px;\n    font-weight: 600;\n    color: #524f4e;\n    background: white;\n    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);\n    transition: .3s;\n}\n.floating-button:hover {\n    background: #2EE59D;\n    box-shadow: 0 15px 20px rgba(46, 229, 157, .4);\n    color: white;\n    transform: translateY(-7px);\n}\n.container div {\n    width: 70%;\n}\n.container .maxInfo {\n    display: flex;\n    flex-direction: column;\n    width: 200px;\n}\n.maxInfo h3 {\n    margin: 0;\n}\ninput {\n    outline: none;\n    transition: 1s;\n    font-family: Comic Sans MS, Comic Sans, cursive;\n    width: 90%;\n    text-decoration: none;\n    color: black;\n    padding: 10px;\n    border-radius: 10px;\n    border-color: transparent;\n    letter-spacing: 2px;\n}\ninput:active {\n    transform: scaleX(2);\n\n}\n.city {\n    position: relative;\n    transition: .5s;\n    box-sizing: border-box;\n    padding: 10px;\n    border-radius: 5px;\n    margin-top: 10px;\n    width: 70%;\n    height: 30%;\n    background: #d6eaf8;\n    display: flex;\n    align-items: center;\n    justify-content: space-evenly;\n}\n\n.city-country::after {\n    content: "click to edit";\n    position: absolute;\n    background: #2EE59D;\n    color: white;\n    width: 100px;\n    height: 15px;\n    font-size: 10px;\n    text-align: center;\n    border-radius: 5px;\n    bottom: 10px;\n    left: 20px;\n\n}\n\n.delete-button {\n    background: #ff3000;\n}\n.delete-button:hover {\n    background: #ff3000;\n    box-shadow: 0 15px 20px rgba(229, 46, 83, 0.4);\n}\n.city h2 {\n    width: 150px;\n}\n.search-field {\n    box-sizing: border-box;\n    background: #d6eaf8;\n    box-shadow: 0 0 20px rgba(0, 0, 0, .1);\n    transition: .5s;\n    padding: 20px;\n    display: flex;\n    border-radius: 10px;\n}\n.change-city-input {\n    width: 20%;\n    border-radius: 0;\n    position: absolute;\n    bottom: -10px;\n    left: 0px;\n}\n.change-city-button {\n    margin: 0;\n    position: absolute;\n    left: 24%;\n    bottom: -10px;\n    width: 20%;\n    height: 40px;\n}\n.close-change-button {\n    margin: 0;\n    position: absolute;\n    left: 44%;\n    bottom: -10px;\n    width: 20%;\n    height: 40px;\n\n}\n.close-change-button:hover {\n    background: #ff3000;\n    box-shadow: 0 15px 20px rgba(229, 46, 83, 0.4);\n}\n.widgets {\n    margin: 0 auto;\n    width: 90%;\n    display: flex;\n    justify-content: space-evenly;\n}\n.smallWidget {\n    width: 250px;\n    transition: .5s;\n    background: #d6eaf8;\n    padding: 10px;\n    border-radius: 10px;\n    border: 1px solid aliceblue;\n}\n.smallWidget:hover {\n    transform: translateY(-7px);\n}\n\n.smallWidget:first-child {\n    text-align: center;\n    display: flex;\n    align-items: center;\n}\n#locationAllow {\n    width: 100%;\n    border-radius: 10px;\n    height: 100px;\n    margin-top: 25px;\n}\n.alert {\n    color: #d6eaf8;\n    background-color: #2EE59D;\n    position: absolute;\n    /*top: 200px;*/\n    z-index: 600;\n    transition: 2s;\n    border: 2px solid #d6eaf8;\n    border-radius: 20px;\n    text-align: center;\n}\n@media (max-width: 1024px) {\n    .container {\n        font-size: 27px;\n    }\n    .container div {\n        width: 100%;\n    }\n    button {\n        font-size: 17px;\n        height: 100px;\n    }\n    .city {\n        height: 200px;\n        font-size: 20px;\n    }\n    .search-field {\n        height: 200px;\n    }\n    .city-search {\n        font-size: 30px;\n    }\n    .widgets {\n        padding: 0;\n        flex-direction: column;\n        align-items: center;\n    }\n    .smallWidget {\n\n        text-align: center;\n        width: 100%;\n        margin-bottom: 10px;\n    }\n    .smallWidget:first-child {\n        display: flex;\n        justify-content: space-evenly;\n\n    }\n    .change-city-button {\n        left: 23%;\n        height: 20%;\n    }\n    .add-button {\n        height: 100%;\n    }\n\n\n}\n@media (max-width: 375px) {\n    .search-field {\n        display: flex;\n        flex-wrap: wrap;\n        justify-content: center;\n    }\n\n    .city-search {\n        height: 40%;\n        font-size: 30px;\n    }\n    .add-button {\n        height: 40%;\n    }\n    .city {\n        flex-wrap: wrap;\n        display: flex;\n        font-size: 20px;\n        height: 10%;\n    }\n    .widgets {\n        align-items: center;\n    }\n    .change-city-input {\n        width: 80%;\n        bottom: 40%;\n        font-size: 20px;\n    }\n    .change-city-button {\n        left: 90%;\n        bottom: 150px;\n        height: 50px;\n    }\n    .close-change-button {\n        bottom: 100px;\n        left: 90%;\n        height: 50px;\n    }\n    .city-country::after {\n        transition: 1s;\n        bottom: 59%;\n        /*transform: rotate(90deg);*/\n    }\n}\n\n',""]);const a=o},476:e=>{e.exports=function(e){var t=[];return t.toString=function(){return this.map((function(t){var n=e(t);return t[2]?"@media ".concat(t[2]," {").concat(n,"}"):n})).join("")},t.i=function(e,n,i){"string"==typeof e&&(e=[[null,e,""]]);var o={};if(i)for(var a=0;a<this.length;a++){var r=this[a][0];null!=r&&(o[r]=!0)}for(var c=0;c<e.length;c++){var s=[].concat(e[c]);i&&o[s[0]]||(n&&(s[2]?s[2]="".concat(n," and ").concat(s[2]):s[2]=n),t.push(s))}},t}},892:(e,t,n)=>{var i,o=function(){var e={};return function(t){if(void 0===e[t]){var n=document.querySelector(t);if(window.HTMLIFrameElement&&n instanceof window.HTMLIFrameElement)try{n=n.contentDocument.head}catch(e){n=null}e[t]=n}return e[t]}}(),a=[];function r(e){for(var t=-1,n=0;n<a.length;n++)if(a[n].identifier===e){t=n;break}return t}function c(e,t){for(var n={},i=[],o=0;o<e.length;o++){var c=e[o],s=t.base?c[0]+t.base:c[0],u=n[s]||0,d="".concat(s," ").concat(u);n[s]=u+1;var l=r(d),p={css:c[1],media:c[2],sourceMap:c[3]};-1!==l?(a[l].references++,a[l].updater(p)):a.push({identifier:d,updater:g(p,t),references:1}),i.push(d)}return i}function s(e){var t=document.createElement("style"),i=e.attributes||{};if(void 0===i.nonce){var a=n.nc;a&&(i.nonce=a)}if(Object.keys(i).forEach((function(e){t.setAttribute(e,i[e])})),"function"==typeof e.insert)e.insert(t);else{var r=o(e.insert||"head");if(!r)throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");r.appendChild(t)}return t}var u,d=(u=[],function(e,t){return u[e]=t,u.filter(Boolean).join("\n")});function l(e,t,n,i){var o=n?"":i.media?"@media ".concat(i.media," {").concat(i.css,"}"):i.css;if(e.styleSheet)e.styleSheet.cssText=d(t,o);else{var a=document.createTextNode(o),r=e.childNodes;r[t]&&e.removeChild(r[t]),r.length?e.insertBefore(a,r[t]):e.appendChild(a)}}function p(e,t,n){var i=n.css,o=n.media,a=n.sourceMap;if(o?e.setAttribute("media",o):e.removeAttribute("media"),a&&"undefined"!=typeof btoa&&(i+="\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(a))))," */")),e.styleSheet)e.styleSheet.cssText=i;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(i))}}var h=null,f=0;function g(e,t){var n,i,o;if(t.singleton){var a=f++;n=h||(h=s(t)),i=l.bind(null,n,a,!1),o=l.bind(null,n,a,!0)}else n=s(t),i=p.bind(null,n,t),o=function(){!function(e){if(null===e.parentNode)return!1;e.parentNode.removeChild(e)}(n)};return i(e),function(t){if(t){if(t.css===e.css&&t.media===e.media&&t.sourceMap===e.sourceMap)return;i(e=t)}else o()}}e.exports=function(e,t){(t=t||{}).singleton||"boolean"==typeof t.singleton||(t.singleton=(void 0===i&&(i=Boolean(window&&document&&document.all&&!window.atob)),i));var n=c(e=e||[],t);return function(e){if(e=e||[],"[object Array]"===Object.prototype.toString.call(e)){for(var i=0;i<n.length;i++){var o=r(n[i]);a[o].references--}for(var s=c(e,t),u=0;u<n.length;u++){var d=r(n[u]);0===a[d].references&&(a[d].updater(),a.splice(d,1))}n=s}}}}},t={};function n(i){if(t[i])return t[i].exports;var o=t[i]={id:i,exports:{}};return e[i](o,o.exports,n),o.exports}n.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return n.d(t,{a:t}),t},n.d=(e,t)=>{for(var i in t)n.o(t,i)&&!n.o(e,i)&&Object.defineProperty(e,i,{enumerable:!0,get:t[i]})},n.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),(()=>{function e(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}var t=function(){function t(){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,t),this.container=document.querySelector(".container"),this.input=document.querySelector("input"),this.widgets=document.createElement("div"),this.currencyWidget=document.createElement("div"),this.geoWidget=document.createElement("div")}var n,i;return n=t,(i=[{key:"buildCityBlock",value:function(e,t,n,i,o){if(o)o.innerHTML="",this.content2CityBlock(o,e,t,n);else{var a=document.createElement("div");a.id=i,a.classList.add("city"),this.container.append(a),this.content2CityBlock(a,e,t,n)}}},{key:"content2CityBlock",value:function(e,t,n,i){var o=document.createElement("h2"),a=document.createElement("button"),r=document.createElement("img"),c=document.createElement("h3"),s=document.createElement("div"),u=document.createElement("h3"),d=document.createElement("h3"),l=document.createElement("h3");o.setAttribute("data-type","location"),o.classList.add("city-country"),a.classList.add("delete-button"),a.classList.add("floating-button"),a.innerHTML="DELETE",a.setAttribute("data-id","delete"),r.setAttribute("src",n),c.innerHTML="".concat(i," &deg C"),s.classList.add("maxInfo"),u.innerHTML=t.weather[0].description,d.innerHTML="wind: ".concat(t.wind.speed,"mph"),l.innerHTML="humidity: ".concat(t.main.humidity,"%"),o.innerText="".concat(t.name,", ").concat(t.sys.country),e.append(o,r,c,s,a),s.append(u,d,l)}},{key:"clearInput",value:function(){this.input.value=""}},{key:"removeCity",value:function(e){e.parentNode.remove()}},{key:"reNameCity",value:function(e){var t=e.parentNode,n=document.createElement("input"),i=document.createElement("button"),o=document.createElement("button");o.setAttribute("data-type","close"),i.setAttribute("data-type","save"),n.classList.add("change-city-input"),o.classList.add("close-change-button"),o.classList.add("floating-button"),i.classList.add("change-city-button"),i.classList.add("floating-button"),n.setAttribute("placeholder","Enter new city..."),i.innerHTML="save",o.innerHTML="close",t.append(n,i,o)}},{key:"cancelChange",value:function(e){e.previousSibling.remove(),e.previousSibling.remove(),e.remove()}},{key:"pictureWidgetsBlock",value:function(){this.widgets.classList.add("widgets"),this.currencyWidget.classList.add("smallWidget"),this.geoWidget.classList.add("smallWidget");var e=document.createElement("button");e.id="locationAllow",e.classList.add("floating-button"),e.innerHTML="Receive your weather",this.geoWidget.append(e),this.widgets.append(this.geoWidget,this.currencyWidget),document.body.append(this.widgets)}},{key:"pictureCurrencyWidget",value:function(e){var t=document.createElement("p");t.innerHTML=e,this.currencyWidget.append(t)}},{key:"pictureGeoWidget",value:function(e,t,n){this.geoWidget.innerHTML="";var i=document.createElement("h2"),o=document.createElement("h2"),a=document.createElement("img");i.innerHTML=e,o.innerHTML="".concat(t," &deg C"),a.setAttribute("src",n),this.geoWidget.append(i,o,a)}},{key:"geoWidgetWait",value:function(e){this.geoWidget.innerHTML="";var t=document.createElement("h4");t.innerText=e,this.geoWidget.append(t)}},{key:"clearCurrencyWidget",value:function(){this.currencyWidget.innerHTML=""}},{key:"alertMessage",value:function(e){var t=document.createElement("div");t.classList.add("alert");var n=document.createElement("h1");n.innerHTML=e,t.style.top=window.pageYOffset+document.documentElement.clientHeight/3+"px",t.append(n),this.container.append(t),setTimeout(this.removeAlertMessage,2e3)}},{key:"removeAlertMessage",value:function(){document.querySelector(".alert").remove()}}])&&e(n.prototype,i),t}();function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}function o(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=function(){function e(t){var n=this;!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),o(this,"initCurrencyWidget",(function(){n.view.clearCurrencyWidget(),fetch("https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5").then((function(e){return e.ok&&200===e.status?e.json():Promise.reject(e.status)})).then((function(e){return e.forEach((function(e){n.view.pictureCurrencyWidget("".concat(e.ccy,"/").concat(e.base_ccy," : ").concat(e.buy,"/").concat(e.sale))}))})),setTimeout(n.initCurrencyWidget,36e5)})),o(this,"initGeoWidget",(function(){navigator.geolocation?(n.view.geoWidgetWait("Locating…"),navigator.geolocation.getCurrentPosition((function(e){var t=e.coords.latitude,i=e.coords.longitude;fetch("https://api.openweathermap.org/data/2.5/weather?lat=".concat(t,"&lon=").concat(i,"&appid=e50ec27dac6fac01c3d6889743f8b9d5")).then((function(e){return e.ok&&200===e.status?e.json():Promise.reject(e.status)})).then((function(e){return n.view.pictureGeoWidget(e.name,n.calculateTempreture(e.main.temp),n.getWeatherImage(e.weather[0].icon))}))}),(function(){n.view.geoWidgetWait("Unable to retrieve your location")}))):n.view.geoWidgetWait("Geolocation is not supported by your browser")})),o(this,"getNewCity",(function(e){fetch("https://api.openweathermap.org/data/2.5/weather?q="+e+"&appid=e50ec27dac6fac01c3d6889743f8b9d5").then((function(e){return e.ok&&200===e.status?e.json():Promise.reject(e.status)})).then((function(e){return n.saveToServer(e)})).catch((function(e){return n.view.alertMessage("No such city!")}))})),o(this,"saveToServer",(function(e){var t={name:e.name};fetch("http://localhost:3333/add",{method:"POST",headers:{"Content-type":"application/json;charset=utf-8"},body:JSON.stringify(t)}).then((function(e){return e.ok&&200===e.status?e.json():Promise.reject(e.status)})).then((function(t){return n.view.buildCityBlock(e,n.getWeatherImage(e.weather[0].icon),n.calculateTempreture(e.main.temp),t)})).catch((function(e){return console.log(e)}))})),this.view=t}var t,n;return t=e,(n=[{key:"initCityList",value:function(){var e=this;fetch("http://localhost:3333/cities").then((function(e){return e.json()})).then((function(t){return t.forEach((function(t){e.refreshData(t.name,t._id)}))})).catch((function(e){return console.log(e)}))}},{key:"initWidgets",value:function(){this.view.pictureWidgetsBlock(),this.initCurrencyWidget()}},{key:"refreshData",value:function(e,t){var n=this;fetch("https://api.openweathermap.org/data/2.5/weather?q="+e+"&appid=e50ec27dac6fac01c3d6889743f8b9d5").then((function(e){return e.ok&&200===e.status?e.json():Promise.reject(e.status)})).then((function(e){n.view.buildCityBlock(e,n.getWeatherImage(e.weather[0].icon),n.calculateTempreture(e.main.temp),t)})).catch((function(e){return n.view.alert(e)}))}},{key:"renameCity",value:function(e,t){var n=this;fetch("https://api.openweathermap.org/data/2.5/weather?q="+e+"&appid=e50ec27dac6fac01c3d6889743f8b9d5").then((function(e){return e.ok&&200===e.status?e.json():Promise.reject(e.status)})).then((function(i){return n.changeAtServer(e,t.id,i,t)})).catch((function(e){return e?n.view.alertMessage("No such city!"):console.log("no error")}))}},{key:"getWeatherImage",value:function(e){return"http://openweathermap.org/img/wn/".concat(e,"@2x.png")}},{key:"calculateTempreture",value:function(e){return Math.ceil(Number(e)-273.15)}},{key:"deleteFromServer",value:function(e){this.cityList--,fetch("http://localhost:3333/"+e,{method:"DELETE"}).then((function(e){return e.ok&&200===e.status?e.json():Promise.reject(e.status)})).catch((function(e){return console.log(e)}))}},{key:"changeAtServer",value:function(e,t,n,i){var o=this,a={name:e};fetch("http://localhost:3333/"+t,{method:"PUT",headers:{"Content-type":"application/json;charset=utf-8"},body:JSON.stringify(a)}).then((function(e){return e.ok&&200===e.status?e.text():Promise.reject(e.status)})).then((function(e){return o.view.buildCityBlock(n,o.getWeatherImage(n.weather[0].icon),o.calculateTempreture(n.main.temp),t,i)})).then((function(e){return o.view.alertMessage("City has been changed!")})).catch((function(e){return console.log(e)}))}}])&&i(t.prototype,n),e}();function r(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}var c=function(){function e(t){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),this.model=t}var t,n;return t=e,(n=[{key:"_initApp",value:function(){var e=this;this.model.initCityList(),this.model.initWidgets(),this.model.view.container.addEventListener("click",(function(t){"add"===t.target.id?(e.model.getNewCity(e.model.view.input.value),e.model.view.clearInput()):"delete"===t.target.dataset.id?(e.model.deleteFromServer(t.target.parentNode.id),e.model.view.removeCity(t.target)):"location"===t.target.dataset.type?e.model.view.reNameCity(t.target):"save"===t.target.dataset.type?e.model.renameCity(t.target.previousSibling.value,t.target.parentNode):"close"===t.target.dataset.type&&e.model.view.cancelChange(t.target)})),this.model.view.widgets.addEventListener("click",(function(t){"locationAllow"===t.target.id&&e.model.initGeoWidget()}))}}])&&r(t.prototype,n),e}(),s=n(892),u=n.n(s),d=n(588);u()(d.Z,{insert:"head",singleton:!1}),d.Z.locals,document.addEventListener("DOMContentLoaded",(function(){var e=new t,n=new a(e);new c(n)._initApp()}))})()})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+
+;// CONCATENATED MODULE: ./scripts/view.js
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var View = /*#__PURE__*/function () {
+  function View() {
+    _classCallCheck(this, View);
+
+    this.container = document.querySelector('.container');
+    this.input = document.querySelector('input');
+    this.widgets = document.createElement('div');
+    this.currencyWidget = document.createElement('div');
+    this.geoWidget = document.createElement('div');
+  }
+
+  _createClass(View, [{
+    key: "buildCityBlock",
+    value: function buildCityBlock(res, imagesrc, temp, id, currentBlock) {
+      if (!currentBlock) {
+        var cityBlock = document.createElement('div');
+        cityBlock.id = id;
+        cityBlock.classList.add('city');
+        this.container.append(cityBlock);
+        this.content2CityBlock(cityBlock, res, imagesrc, temp);
+      } else {
+        currentBlock.innerHTML = '';
+        this.content2CityBlock(currentBlock, res, imagesrc, temp);
+      }
+    }
+  }, {
+    key: "content2CityBlock",
+    value: function content2CityBlock(cityBlock, res, imagesrc, temp) {
+      var cityCountry = document.createElement('h2');
+      var button = document.createElement('button');
+      var image = document.createElement('img');
+      var tempreture = document.createElement('h3');
+      var maxInfo = document.createElement('div');
+      var skyState = document.createElement('h3');
+      var windSpeed = document.createElement('h3');
+      var humidity = document.createElement('h3');
+      cityCountry.setAttribute('data-type', 'location');
+      cityCountry.classList.add('city-country');
+      button.classList.add('delete-button');
+      button.classList.add('floating-button');
+      button.innerHTML = 'DELETE';
+      button.setAttribute('data-id', "delete");
+      image.setAttribute('src', imagesrc);
+      tempreture.innerHTML = "".concat(temp, " &deg C");
+      maxInfo.classList.add('maxInfo');
+      skyState.innerHTML = res.weather[0].description;
+      windSpeed.innerHTML = "wind: ".concat(res.wind.speed, "mph");
+      humidity.innerHTML = "humidity: ".concat(res.main.humidity, "%");
+      cityCountry.innerText = "".concat(res.name, ", ").concat(res.sys.country);
+      cityBlock.append(cityCountry, image, tempreture, maxInfo, button);
+      maxInfo.append(skyState, windSpeed, humidity);
+    }
+  }, {
+    key: "clearInput",
+    value: function clearInput() {
+      this.input.value = '';
+    }
+  }, {
+    key: "removeCity",
+    value: function removeCity(target) {
+      target.parentNode.remove();
+    }
+  }, {
+    key: "reNameCity",
+    value: function reNameCity(target) {
+      var div = target.parentNode;
+      var input = document.createElement('input');
+      var buttonSave = document.createElement('button');
+      var buttonClose = document.createElement('button');
+      buttonClose.setAttribute('data-type', 'close');
+      buttonSave.setAttribute('data-type', 'save');
+      input.classList.add('change-city-input');
+      buttonClose.classList.add('close-change-button');
+      buttonClose.classList.add('floating-button');
+      buttonSave.classList.add('change-city-button');
+      buttonSave.classList.add('floating-button');
+      input.setAttribute('placeholder', 'Enter new city...');
+      buttonSave.innerHTML = "save";
+      buttonClose.innerHTML = "close";
+      div.append(input, buttonSave, buttonClose);
+    }
+  }, {
+    key: "cancelChange",
+    value: function cancelChange(buttonClose) {
+      buttonClose.previousSibling.remove();
+      buttonClose.previousSibling.remove();
+      buttonClose.remove();
+    }
+  }, {
+    key: "pictureWidgetsBlock",
+    value: function pictureWidgetsBlock() {
+      this.widgets.classList.add('widgets');
+      this.currencyWidget.classList.add('smallWidget');
+      this.geoWidget.classList.add('smallWidget');
+      var button = document.createElement('button');
+      button.id = 'locationAllow';
+      button.classList.add('floating-button');
+      button.innerHTML = "Receive your weather";
+      this.geoWidget.append(button);
+      this.widgets.append(this.geoWidget, this.currencyWidget);
+      document.body.append(this.widgets);
+    }
+  }, {
+    key: "pictureCurrencyWidget",
+    value: function pictureCurrencyWidget(curr) {
+      var currency = document.createElement('p');
+      currency.innerHTML = curr;
+      this.currencyWidget.append(currency);
+    }
+  }, {
+    key: "pictureGeoWidget",
+    value: function pictureGeoWidget(cityName, temp, imgSrc) {
+      this.geoWidget.innerHTML = '';
+      var city = document.createElement('h2');
+      var tempreture = document.createElement('h2');
+      var img = document.createElement('img');
+      city.innerHTML = cityName;
+      tempreture.innerHTML = "".concat(temp, " &deg C");
+      img.setAttribute('src', imgSrc);
+      this.geoWidget.append(city, tempreture, img);
+    }
+  }, {
+    key: "geoWidgetWait",
+    value: function geoWidgetWait(text) {
+      this.geoWidget.innerHTML = '';
+      var h4 = document.createElement('h4');
+      h4.innerText = text;
+      this.geoWidget.append(h4);
+    }
+  }, {
+    key: "clearCurrencyWidget",
+    value: function clearCurrencyWidget() {
+      this.currencyWidget.innerHTML = '';
+    }
+  }, {
+    key: "alertMessage",
+    value: function alertMessage(text) {
+      var div = document.createElement('div');
+      div.classList.add('alert');
+      var h1 = document.createElement('h1');
+      h1.innerHTML = text;
+      div.style.top = window.pageYOffset + document.documentElement.clientHeight / 3 + 'px';
+      div.append(h1);
+      this.container.append(div);
+      setTimeout(this.removeAlertMessage, 2000);
+    }
+  }, {
+    key: "removeAlertMessage",
+    value: function removeAlertMessage() {
+      var div = document.querySelector('.alert');
+      div.remove();
+    }
+  }]);
+
+  return View;
+}();
+
+
+;// CONCATENATED MODULE: ./scripts/model.js
+function model_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function model_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function model_createClass(Constructor, protoProps, staticProps) { if (protoProps) model_defineProperties(Constructor.prototype, protoProps); if (staticProps) model_defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Model = /*#__PURE__*/function () {
+  function Model(view) {
+    var _this = this;
+
+    model_classCallCheck(this, Model);
+
+    _defineProperty(this, "initCurrencyWidget", function () {
+      _this.view.clearCurrencyWidget();
+
+      var promise = fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5');
+      promise.then(function (res) {
+        if (res.ok && res.status === 200) {
+          return res.json();
+        } else {
+          return Promise.reject(res.status);
+        }
+      }).then(function (res) {
+        return res.forEach(function (item) {
+          _this.view.pictureCurrencyWidget("".concat(item.ccy, "/").concat(item.base_ccy, " : ").concat(item.buy, "/").concat(item.sale));
+        });
+      });
+      setTimeout(_this.initCurrencyWidget, 3600000);
+    });
+
+    _defineProperty(this, "initGeoWidget", function () {
+      var success = function success(position) {
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        var promise = fetch("https://api.openweathermap.org/data/2.5/weather?lat=".concat(lat, "&lon=").concat(lon, "&appid=e50ec27dac6fac01c3d6889743f8b9d5"));
+        promise.then(function (res) {
+          if (res.ok && res.status === 200) {
+            return res.json();
+          } else {
+            return Promise.reject(res.status);
+          }
+        }).then(function (res) {
+          return _this.view.pictureGeoWidget(res.name, _this.calculateTempreture(res.main.temp), _this.getWeatherImage(res['weather'][0].icon));
+        });
+      };
+
+      var error = function error() {
+        _this.view.geoWidgetWait('Unable to retrieve your location');
+      };
+
+      if (!navigator.geolocation) {
+        _this.view.geoWidgetWait('Geolocation is not supported by your browser');
+      } else {
+        _this.view.geoWidgetWait('Locating…');
+
+        navigator.geolocation.getCurrentPosition(success, error);
+      }
+    });
+
+    _defineProperty(this, "getNewCity", function (cityName) {
+      var promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
+      promise.then(function (res) {
+        if (res.ok && res.status === 200) {
+          return res.json();
+        } else {
+          return Promise.reject(res.status);
+        }
+      }).then(function (res) {
+        return _this.saveToServer(res);
+      })["catch"](function (err) {
+        return _this.view.alertMessage('No such city!');
+      });
+    });
+
+    _defineProperty(this, "saveToServer", function (responseFromWeather) {
+      var city = {
+        name: responseFromWeather['name']
+      };
+      var promise = fetch('http://localhost:3333/add', {
+        method: "POST",
+        headers: {
+          'Content-type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(city)
+      });
+      promise.then(function (res) {
+        if (res.ok && res.status === 200) {
+          return res.json();
+        } else {
+          return Promise.reject(res.status);
+        }
+      }).then(function (res) {
+        return _this.view.buildCityBlock(responseFromWeather, _this.getWeatherImage(responseFromWeather['weather'][0].icon), _this.calculateTempreture(responseFromWeather.main.temp), res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    });
+
+    this.view = view;
+  }
+
+  model_createClass(Model, [{
+    key: "initCityList",
+    value: function initCityList() {
+      var _this2 = this;
+
+      var promise = fetch('http://localhost:3333/cities');
+      promise.then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        return res.forEach(function (item) {
+          _this2.refreshData(item.name, item._id);
+        });
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: "initWidgets",
+    value: function initWidgets() {
+      this.view.pictureWidgetsBlock();
+      this.initCurrencyWidget();
+    }
+  }, {
+    key: "refreshData",
+    value: function refreshData(cityName, id) {
+      var _this3 = this;
+
+      var promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
+      promise.then(function (res) {
+        if (res.ok && res.status === 200) {
+          return res.json();
+        } else {
+          return Promise.reject(res.status);
+        }
+      }).then(function (res) {
+        _this3.view.buildCityBlock(res, _this3.getWeatherImage(res['weather'][0].icon), _this3.calculateTempreture(res.main.temp), id);
+      })["catch"](function (err) {
+        return _this3.view.alert(err);
+      });
+    }
+  }, {
+    key: "renameCity",
+    value: function renameCity(cityName, parentNode) {
+      var _this4 = this;
+
+      var promise = fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e50ec27dac6fac01c3d6889743f8b9d5');
+      promise.then(function (res) {
+        if (res.ok && res.status === 200) {
+          return res.json();
+        } else {
+          return Promise.reject(res.status);
+        }
+      }).then(function (res) {
+        return _this4.changeAtServer(cityName, parentNode.id, res, parentNode);
+      })["catch"](function (err) {
+        return err ? _this4.view.alertMessage('No such city!') : console.log('no error');
+      });
+    }
+  }, {
+    key: "getWeatherImage",
+    value: function getWeatherImage(code) {
+      return "http://openweathermap.org/img/wn/".concat(code, "@2x.png");
+    }
+  }, {
+    key: "calculateTempreture",
+    value: function calculateTempreture(kelvin) {
+      return Math.ceil(Number(kelvin) - 273.15);
+    }
+  }, {
+    key: "deleteFromServer",
+    value: function deleteFromServer(id) {
+      this.cityList--;
+      var promise = fetch('http://localhost:3333/' + id, {
+        method: "DELETE"
+      });
+      promise.then(function (res) {
+        if (res.ok && res.status === 200) {
+          return res.json();
+        } else {
+          return Promise.reject(res.status);
+        }
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: "changeAtServer",
+    value: function changeAtServer(cityName, id, freshData, parentNode) {
+      var _this5 = this;
+
+      var city = {
+        name: cityName
+      };
+      var promise = fetch('http://localhost:3333/' + id, {
+        method: "PUT",
+        headers: {
+          'Content-type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(city)
+      });
+      promise.then(function (res) {
+        if (res.ok && res.status === 200) {
+          return res.text();
+        } else {
+          return Promise.reject(res.status);
+        }
+      }).then(function (res) {
+        return _this5.view.buildCityBlock(freshData, _this5.getWeatherImage(freshData['weather'][0].icon), _this5.calculateTempreture(freshData.main.temp), id, parentNode);
+      }).then(function (res) {
+        return _this5.view.alertMessage('City has been changed!');
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  }]);
+
+  return Model;
+}();
+
+
+;// CONCATENATED MODULE: ./scripts/controller.js
+function controller_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function controller_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function controller_createClass(Constructor, protoProps, staticProps) { if (protoProps) controller_defineProperties(Constructor.prototype, protoProps); if (staticProps) controller_defineProperties(Constructor, staticProps); return Constructor; }
+
+var Controller = /*#__PURE__*/function () {
+  function Controller(model) {
+    controller_classCallCheck(this, Controller);
+
+    this.model = model;
+  }
+
+  controller_createClass(Controller, [{
+    key: "_initApp",
+    value: function _initApp() {
+      var _this = this;
+
+      this.model.initCityList();
+      this.model.initWidgets();
+      this.model.view.container.addEventListener('click', function (e) {
+        if (e.target.id === "add") {
+          _this.model.getNewCity(_this.model.view.input.value);
+
+          _this.model.view.clearInput();
+        } else if (e.target.dataset.id === "delete") {
+          _this.model.deleteFromServer(e.target.parentNode.id);
+
+          _this.model.view.removeCity(e.target);
+        } else if (e.target.dataset.type === "location") {
+          _this.model.view.reNameCity(e.target);
+        } else if (e.target.dataset.type === "save") {
+          _this.model.renameCity(e.target.previousSibling.value, e.target.parentNode);
+        } else if (e.target.dataset.type === "close") {
+          _this.model.view.cancelChange(e.target);
+        }
+      });
+      this.model.view.widgets.addEventListener('click', function (e) {
+        if (e.target.id === "locationAllow") {
+          _this.model.initGeoWidget();
+        }
+      });
+    }
+  }]);
+
+  return Controller;
+}();
+
+
+;// CONCATENATED MODULE: ./scripts/script.js
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  var view = new View();
+  var model = new Model(view);
+  var controller = new Controller(model);
+
+  controller._initApp();
+});
+/******/ })()
+;

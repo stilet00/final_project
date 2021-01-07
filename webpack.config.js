@@ -1,8 +1,28 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: "production",
+    entry: "/scripts/script.js",
+    output: {
+        filename: "bundle.js",
+        path: path.resolve(__dirname, 'dist')
+    },
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin()
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin( {
+            filename: "/styles/style.css"
+        }),
+        new HTMLWebpackPlugin({
+            template: "index.html"
+        })
+    ],
     module: {
         rules: [
             {
@@ -17,20 +37,9 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
 
             }
         ]
-    },
-
-    entry: "/scripts/script.js",
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, 'dist')
-    },
-    plugins: [
-        new HTMLWebpackPlugin({
-            template: "index.html"
-        })
-    ]
+    }
 }
