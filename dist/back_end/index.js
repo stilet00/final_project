@@ -22,6 +22,10 @@ app.use(function(req, res, next) {
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     next();
 })
+// app.get('/', (req, res) => {
+//     res.send('<h1>HOME PAGE</h1>')
+// })
+
 
 app.get(rootURL + 'cities', (req, res) => {
     db.collection('cities').find().toArray((err, docs) => {
