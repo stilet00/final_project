@@ -26,7 +26,7 @@
   "main": "src/scripts/script.js",
   "scripts": {
     "start": "webpack",
-    "dev": "nodemon src/back_end/index.js"
+    "dev": "nodemon dist/back_end/index.js"
   },
   "repository": {
     "type": "git",

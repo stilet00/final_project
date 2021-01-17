@@ -3,30 +3,41 @@ let MongoClient = require('mongodb').MongoClient;
 let ObjectId = require('mongodb').ObjectID;
 let bodyParser = require('body-parser');
 let db;
-
-
 let rootURL = '/';
 let dataRootURL = 'mongodb://localhost:27017'
 let dbName = 'myProject';
 let app = express();
 let client = new MongoClient(dataRootURL);
+let fs = require('fs').promises;
+let path = '/Users/antonstilet/Desktop/final_project/dist';
+app.use(express.static("/Users/antonstilet/Desktop/final_project/dist"));
+app.use(express.static("public"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extented: true}));
 app.use(function(req, res, next) {
-    // req.header("Access-Control-Allow-Origin", "*");
-    // res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    //Работает только так:
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     next();
 })
-// app.get('/', (req, res) => {
-//     res.send('<h1>HOME PAGE</h1>')
-// })
 
 
+app.get('/', function(req, res) {
+    fs.readFile(path + "/public/index.html")
+        .then(contents => {
+            res.setHeader("Content-Type", "text/html");
+            res.writeHead(200);
+            res.end(contents);
+        })
+
+});
+app.get('/styles/style.css', function(req, res) {
+    res.sendFile(path + "/public/styles/style.css");
+});
+app.get('/bundle.js', function(req, res) {
+    res.sendFile(path + "/public/bundle.js");
+});
 app.get(rootURL + 'cities', (req, res) => {
     db.collection('cities').find().toArray((err, docs) => {
         if (err) {
@@ -81,3 +92,12 @@ client.connect(function (err) {
         console.log('API started');
     });
 })
+
+// serve application
+// let express = require('express');
+
+// let app = express();
+
+
+// app.listen(3333);
+// console.log('server is running')
