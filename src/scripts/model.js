@@ -31,6 +31,7 @@ export default class Model {
         setTimeout(this.initCurrencyWidget, 3600000)
     }
     initGeoWidget = () => {
+
         let success = (position) => {
             const lat  = position.coords.latitude;
             const lon = position.coords.longitude;
@@ -46,7 +47,7 @@ export default class Model {
         }
 
         let error = () => {
-            this.view.geoWidgetWait('Unable to retrieve your location');
+            this.view.geoWidgetWait('Unable to retrieve your location because of iOS/Safari security');
         }
 
         if(!navigator.geolocation) {
@@ -55,6 +56,7 @@ export default class Model {
             this.view.geoWidgetWait('Locating…');
             navigator.geolocation.getCurrentPosition(success, error);
         }
+
 
     }
     refreshData(cityName, id) {
@@ -112,7 +114,7 @@ export default class Model {
         let city = {
             name: responseFromWeather['name'],
         }
-        let promise = fetch('http://localhost:3333/add', {
+        let promise = fetch('/add', {
             method: "POST",
             headers: {
                 'Content-type': 'application/json;charset=utf-8'
@@ -131,7 +133,7 @@ export default class Model {
     }
     deleteFromServer (id) {
         this.cityList--;
-        let promise = fetch('http://localhost:3333/' + id, {
+        let promise = fetch('/' + id, {
             method: "DELETE"
         });
         promise
@@ -147,7 +149,7 @@ export default class Model {
         let city = {
             name: cityName
         }
-        let promise = fetch('http://localhost:3333/' + id, {
+        let promise = fetch('/' + id, {
             method: "PUT",
             headers: {
                 'Content-type': 'application/json;charset=utf-8'

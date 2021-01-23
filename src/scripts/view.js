@@ -10,9 +10,35 @@ export default class View {
         if (!currentBlock) {
             let cityBlock = document.createElement('div');
             cityBlock.id = id;
+            cityBlock.setAttribute('data-depth', '0.5')
             cityBlock.classList.add('city');
+            cityBlock.style.opacity = 0;
             this.container.append(cityBlock);
             this.content2CityBlock(cityBlock, res, imagesrc, temp);
+            let start = Date.now();
+            let timer = setInterval(function () {
+                // сколько времени прошло с начала анимации?
+                let timePassed = Date.now() - start;
+
+                if (timePassed >= 1000) {
+                    clearInterval(timer); // закончить анимацию через 2 секунды
+                    return;
+                }
+
+                // отрисовать анимацию на момент timePassed, прошедший с начала анимации
+                draw(timePassed);
+
+            }, 10);
+
+            function draw(timePassed) {
+                cityBlock.style.opacity = timePassed/1000;
+            }
+
+
+
+
+
+
         } else {
             currentBlock.innerHTML = '';
             this.content2CityBlock(currentBlock, res, imagesrc, temp);
@@ -50,7 +76,30 @@ export default class View {
         this.input.value = '';
     }
     removeCity(target) {
-        target.parentNode.remove();
+
+            let start = Date.now();
+            let timer = setInterval(function () {
+                // сколько времени прошло с начала анимации?
+                let timePassed = Date.now() - start;
+
+                if (timePassed >= 1000) {
+                    clearInterval(timer); // закончить анимацию через 2 секунды
+                    target.parentNode.remove();
+                    return;
+                }
+
+                // отрисовать анимацию на момент timePassed, прошедший с начала анимации
+                draw(timePassed);
+
+            }, 10);
+
+            function draw(timePassed) {
+
+                target.parentNode.style.opacity = 1 - timePassed/1000;
+                // console.log()
+            }
+
+
     }
     reNameCity(target) {
         let div = target.parentNode;

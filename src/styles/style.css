@@ -1,5 +1,5 @@
 body {
-    font-family: Comic Sans MS, Comic Sans, cursive;
+    font-family: Helvetica;
     background: url("https://images.alphacoders.com/218/thumb-1920-218193.jpg");
     color: #6f6e6e;
 }
@@ -67,7 +67,7 @@ button:focus {
 input {
     outline: none;
     transition: 1s;
-    font-family: Comic Sans MS, Comic Sans, cursive;
+    font-family: Helvetica;
     width: 90%;
     text-decoration: none;
     color: black;
@@ -214,6 +214,8 @@ input:active {
     }
     .search-field {
         height: 200px;
+        display: flex;
+        align-items: center;
     }
     .city-search {
         font-size: 30px;
@@ -244,7 +246,14 @@ input:active {
 
 
 }
-@media (max-width: 375px) {
+@media (max-width: 540px) {
+    .maxInfo {
+        display:none!important;
+    }
+}
+@media (max-width: 414px) {
+
+
     .search-field {
         display: flex;
         flex-wrap: wrap;
@@ -253,7 +262,7 @@ input:active {
 
     .city-search {
         height: 40%;
-        font-size: 30px;
+        font-size: 15px;
     }
     .add-button {
         height: 40%;
@@ -268,24 +277,42 @@ input:active {
         align-items: center;
     }
     .change-city-input {
-        width: 80%;
-        bottom: 40%;
-        font-size: 20px;
+        width: 50%;
+        height: 10px;
+        bottom: 35%;
+        border-radius: 10px;
+        font-size: 15px;
     }
     .change-city-button {
-        left: 90%;
-        bottom: 150px;
-        height: 50px;
+        padding: 0;
+        height: 40px;
+        left: 60%;
+        top: 49%;
+        border-radius: 10px;
     }
     .close-change-button {
-        bottom: 100px;
-        left: 90%;
-        height: 50px;
+        padding: 0;
+        height: 40px;
+        left: 81%;
+        top: 49%;
+        border-radius: 10px;
     }
     .city-country::after {
         transition: 1s;
-        bottom: 59%;
+        bottom: 40%;
         /*transform: rotate(90deg);*/
+    }
+}
+@media (max-width: 320px) {
+    .city-country::after {
+        bottom: 50%;
+        /*transform: rotate(90deg);*/
+    }
+    .change-city-button {
+        top: 53%;
+    }
+    .close-change-button {
+        top: 53%;
     }
 }
 
